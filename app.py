@@ -22,13 +22,15 @@ uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 def load_models():
     embedder = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
     summarizer = pipeline("summarization", model="facebook/bart-large-cnn", device=-1)
-    blip_processor = BlipProcessor.from_pretrained("Salesforce/blip2-opt-2.7b")
-    blip_model = BlipForConditionalGeneration.from_pretrained(
-        "Salesforce/blip2-opt-2.7b",
+
+    from transformers import Blip2Processor, Blip2ForConditionalGeneration
+    processor = Blip2Processor.from_pretrained("Salesforce/blip2-flan-t5-xl")
+    model = Blip2ForConditionalGeneration.from_pretrained(
+        "Salesforce/blip2-flan-t5-xl",
         device_map={"": "cpu"},
         torch_dtype=torch.float32,
     )
-    return embedder, summarizer, blip_processor, blip_model
+    return embedder, summarizer, processor, model
 
 embedder, summarizer, blip_processor, blip_model = load_models()
 
