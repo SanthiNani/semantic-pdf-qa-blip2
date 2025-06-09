@@ -1,5 +1,5 @@
 # 📘 Semantic PDF QA with BLIP-2 in Streamlit (CPU-compatible)
-
+pip install streamlit transformers sentence-transformers faiss-cpu pymupdf Pillow
 import streamlit as st
 import fitz  # PyMuPDF
 import io
